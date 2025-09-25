@@ -1,6 +1,6 @@
 import customtkinter as ctk
 
-# ----- Setup -----
+#Setup
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
@@ -8,10 +8,10 @@ app = ctk.CTk()
 app.title("Storms of Interest")
 app.geometry("600x500")
 
-# ----- Data List -----
+#Data list
 storm_data = []  # This will store (location, windspeed) tuples
 
-# ----- Functions -----
+#Functions
 def add_data():
     location = entry_location.get()
     windspeed = entry_windspeed.get()
@@ -49,7 +49,7 @@ def update_display():
     display_text = "\n".join([f"{loc} - {spd} mph" for loc, spd in storm_data])
     result_label.configure(text=display_text or "No data added yet.")
 
-# ----- Widgets -----
+#Format
 title_label = ctk.CTkLabel(app, text="Storms of Interest", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=10)
 
@@ -71,5 +71,4 @@ button_clear.pack(pady=10)
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
 result_label.pack(pady=20)
 
-# ----- Run App -----
 app.mainloop()
