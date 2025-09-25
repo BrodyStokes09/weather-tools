@@ -50,7 +50,7 @@ def update_display():
     result_label.configure(text=display_text or "No data added yet.")
 
 # ----- Widgets -----
-title_label = ctk.CTkLabel(app, text="Tornado Velocity Estimate", font=ctk.CTkFont(size=20, weight="bold"))
+title_label = ctk.CTkLabel(app, text="Storms of Interest", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=10)
 
 entry_location = ctk.CTkEntry(app, placeholder_text="Enter Location of Storm")
