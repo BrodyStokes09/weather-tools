@@ -1,6 +1,8 @@
 import customtkinter as ctk
 import webbrowser
 import os
+from datetime import datetime
+
 
 #Setup
 ctk.set_appearance_mode("Dark")
@@ -87,14 +89,15 @@ result_label.pack(pady=20)
 def on_closing():
     try:
         if os.path.exists("storm_data.txt"):
+            # Format: == Monday, September 29, 2025  14:37:02 ==
+            timestamp = datetime.now().strftime("%A, %B %d, %Y  %H:%M:%S")
             with open("storm_data.txt", "r") as source_file:
                 data = source_file.read()
             with open("archive.txt", "a") as archive_file:
+                archive_file.write(f"\n== {timestamp} ==\n")
                 archive_file.write(data)
     except Exception as e:
         print(f"Error archiving file: {e}")
     app.destroy()
-
-app.protocol("WM_DELETE_WINDOW", on_closing)
 
 app.mainloop()
