@@ -3,8 +3,7 @@ import webbrowser
 import os
 from datetime import datetime
 
-
-#Setup
+# Setup
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
@@ -12,10 +11,10 @@ app = ctk.CTk()
 app.title("Storms of Interest")
 app.geometry("600x500")
 
-#Data list
+# Data list
 storm_data = []  # This will store (location, windspeed) tuples
 
-#Functions
+# Functions
 def add_data():
     location = entry_location.get()
     windspeed = entry_windspeed.get()
@@ -61,7 +60,19 @@ def open_html_file():
     except Exception as e:
         result_label.configure(text=f"Error opening HTML file: {e}")
 
-#Format
+def on_closing():
+    try:
+        if storm_data:  # Only archive if there is data in memory
+            timestamp = datetime.now().strftime("%A, %B %d, %Y  %H:%M:%S")
+            with open("archive.txt", "a") as archive_file:
+                archive_file.write(f"\n== {timestamp} ==\n")
+                for location, windspeed in storm_data:
+                    archive_file.write(f"{location} - {windspeed} mph\n")
+    except Exception as e:
+        print(f"Error archiving data on close: {e}")
+    app.destroy()
+
+# Format
 title_label = ctk.CTkLabel(app, text="Storms of Interest", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=10)
 
@@ -86,17 +97,8 @@ button_open_html.pack(pady=10)
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
 result_label.pack(pady=20)
 
-def on_closing():
-    try:
-        if storm_data:  # Only archive if there is data in memory
-            timestamp = datetime.now().strftime("%A, %B %d, %Y  %H:%M:%S")
-            with open("archive.txt", "a") as archive_file:
-                archive_file.write(f"\n== {timestamp} ==\n")
-                for location, windspeed in storm_data:
-                    archive_file.write(f"{location} - {windspeed} mph\n")
-    except Exception as e:
-        print(f"Error archiving data on close: {e}")
-    app.destroy()
+# Register the on_closing function with the close event
+app.protocol("WM_DELETE_WINDOW", on_closing)
 
-    app.protocol("WM_DELETE_WINDOW", on_closing)
+# Start the application loop
 app.mainloop()
