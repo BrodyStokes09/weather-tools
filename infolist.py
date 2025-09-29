@@ -78,7 +78,7 @@ button_save.pack(pady=10)
 button_clear = ctk.CTkButton(app, text="Clear All Data", command=clear_data)
 button_clear.pack(pady=10)
 
-button_open_html = ctk.CTkButton(app, text="Access List", command=open_html_file)
+button_open_html = ctk.CTkButton(app, text="Access Data", command=open_html_file)
 button_open_html.pack(pady=10)
 
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
