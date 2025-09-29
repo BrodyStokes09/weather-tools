@@ -88,8 +88,14 @@ result_label.pack(pady=20)
 
 def on_closing():
     try:
+        # Auto-save current storm_data to storm_data.txt
+        if storm_data:
+            with open("storm_data.txt", "w") as f:
+                for location, windspeed in storm_data:
+                    f.write(f"{location} - {windspeed} mph\n")
+
+        # Now archive it (if the file exists)
         if os.path.exists("storm_data.txt"):
-            # Format: == Monday, September 29, 2025  14:37:02 ==
             timestamp = datetime.now().strftime("%A, %B %d, %Y  %H:%M:%S")
             with open("storm_data.txt", "r") as source_file:
                 data = source_file.read()
@@ -99,5 +105,5 @@ def on_closing():
     except Exception as e:
         print(f"Error archiving file: {e}")
     app.destroy()
-
+    
 app.mainloop()
