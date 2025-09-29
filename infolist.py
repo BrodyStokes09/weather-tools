@@ -84,4 +84,17 @@ button_open_html.pack(pady=10)
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
 result_label.pack(pady=20)
 
+def on_closing():
+    try:
+        if os.path.exists("storm_data.txt"):
+            with open("storm_data.txt", "r") as source_file:
+                data = source_file.read()
+            with open("archive.txt", "a") as archive_file:
+                archive_file.write(data)
+    except Exception as e:
+        print(f"Error archiving file: {e}")
+    app.destroy()
+
+app.protocol("WM_DELETE_WINDOW", on_closing)
+
 app.mainloop()
