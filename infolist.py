@@ -1,4 +1,6 @@
 import customtkinter as ctk
+import webbrowser
+import os
 
 #Setup
 ctk.set_appearance_mode("Dark")
@@ -49,6 +51,14 @@ def update_display():
     display_text = "\n".join([f"{loc} - {spd} mph" for loc, spd in storm_data])
     result_label.configure(text=display_text or "No data added yet.")
 
+def open_html_file():
+    try:
+        file_path = os.path.abspath("stormlist.html")
+        webbrowser.open(f"file://{file_path}")
+        result_label.configure(text="Opening stormlist.html...")
+    except Exception as e:
+        result_label.configure(text=f"Error opening HTML file: {e}")
+
 #Format
 title_label = ctk.CTkLabel(app, text="Storms of Interest", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=10)
@@ -70,5 +80,8 @@ button_clear.pack(pady=10)
 
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
 result_label.pack(pady=20)
+
+button_open_html = ctk.CTkButton(app, text="Access List", command=open_html_file)
+button_open_html.pack(pady=10)
 
 app.mainloop()
