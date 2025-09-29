@@ -88,22 +88,15 @@ result_label.pack(pady=20)
 
 def on_closing():
     try:
-        # Auto-save current storm_data to storm_data.txt
-        if storm_data:
-            with open("storm_data.txt", "w") as f:
-                for location, windspeed in storm_data:
-                    f.write(f"{location} - {windspeed} mph\n")
-
-        # Now archive it (if the file exists)
-        if os.path.exists("storm_data.txt"):
+        if storm_data:  # Only archive if there is data in memory
             timestamp = datetime.now().strftime("%A, %B %d, %Y  %H:%M:%S")
-            with open("storm_data.txt", "r") as source_file:
-                data = source_file.read()
             with open("archive.txt", "a") as archive_file:
                 archive_file.write(f"\n== {timestamp} ==\n")
-                archive_file.write(data)
+                for location, windspeed in storm_data:
+                    archive_file.write(f"{location} - {windspeed} mph\n")
     except Exception as e:
-        print(f"Error archiving file: {e}")
+        print(f"Error archiving data on close: {e}")
     app.destroy()
-    
+
+    app.protocol("WM_DELETE_WINDOW", on_closing)
 app.mainloop()
