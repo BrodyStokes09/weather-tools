@@ -60,6 +60,14 @@ def open_html_file():
     except Exception as e:
         result_label.configure(text=f"Error opening HTML file: {e}")
 
+def open_html_file2():
+    try:
+        file_path = os.path.abspath("archives.html")
+        webbrowser.open(f"file://{file_path}")
+        result_label.configure(text="Opening archives.html...")
+    except Exception as e:
+        result_label.configure(text=f"Error opening HTML file: {e}")
+
 def on_closing():
     try:
         if storm_data:  # Only archive if there is data in memory
@@ -92,6 +100,9 @@ button_clear = ctk.CTkButton(app, text="Clear All Data", command=clear_data)
 button_clear.pack(pady=10)
 
 button_open_html = ctk.CTkButton(app, text="Access Data", command=open_html_file)
+button_open_html.pack(pady=10)
+
+button_open_html = ctk.CTkButton(app, text="Access Archives", command=open_html_file2)
 button_open_html.pack(pady=10)
 
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
