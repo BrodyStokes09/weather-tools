@@ -9,4 +9,6 @@ I used chatGPT to assist me in creating these files
 
 "stormlist.html" is simply used to access the saved data from the current session. When the "infolist.py" application is closed, the data in "storm_data.txt" is automatically saved to "archive.txt"
 
-"archive.txt" is the saved data from stormlist.html 
+"archive.txt" is the saved timestamped data from stormlist.html, data is saved here after the app closes
+
+"archives.html" is used to access the saved data from previous sessions. Data here is pulled from "archive.txt"
