@@ -8,7 +8,7 @@ ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
-app.title("Storms of Interest")
+app.title("Storm Tracker")
 app.geometry("600x500")
 
 # Data list
@@ -108,8 +108,7 @@ button_open_html.pack(pady=10)
 result_label = ctk.CTkLabel(app, text="No data added yet.", font=ctk.CTkFont(size=14), justify="left")
 result_label.pack(pady=20)
 
-# Register the on_closing function with the close event
+# triggers the on_closing funciton upon closing the app
 app.protocol("WM_DELETE_WINDOW", on_closing)
 
-# Start the application loop
 app.mainloop()
