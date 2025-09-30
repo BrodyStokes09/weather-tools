@@ -81,7 +81,7 @@ def on_closing():
     app.destroy()
 
 # Format
-title_label = ctk.CTkLabel(app, text="Storms of Interest", font=ctk.CTkFont(size=20, weight="bold"))
+title_label = ctk.CTkLabel(app, text="Storm Tracker", font=ctk.CTkFont(size=20, weight="bold"))
 title_label.pack(pady=10)
 
 entry_location = ctk.CTkEntry(app, placeholder_text="Enter Location of Storm")
